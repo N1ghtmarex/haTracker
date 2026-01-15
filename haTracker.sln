@@ -3,9 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36717.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B3CBBB40-9313-4B90-8971-E48C3A276B22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{F718C83B-6BDA-4078-BD11-96222114ED21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{2052CCE4-AA75-444E-931D-5474B6A3E672}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3CBBB40-9313-4B90-8971-E48C3A276B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CBBB40-9313-4B90-8971-E48C3A276B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CBBB40-9313-4B90-8971-E48C3A276B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CBBB40-9313-4B90-8971-E48C3A276B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2052CCE4-AA75-444E-931D-5474B6A3E672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2052CCE4-AA75-444E-931D-5474B6A3E672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2052CCE4-AA75-444E-931D-5474B6A3E672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2052CCE4-AA75-444E-931D-5474B6A3E672}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B3CBBB40-9313-4B90-8971-E48C3A276B22} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{2052CCE4-AA75-444E-931D-5474B6A3E672} = {F718C83B-6BDA-4078-BD11-96222114ED21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4921F0E5-E2F0-44F3-936B-42B3DA312722}
