@@ -9,6 +9,16 @@ namespace Domain.Entities;
 public class Task : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribute
 {
     /// <summary>
+    /// Идентификатор создателя
+    /// </summary>
+    public required Ulid AuthorId { get; set; }
+
+    /// <summary>
+    /// Создатель
+    /// </summary>
+    public User? Author { get; set; }
+
+    /// <summary>
     /// Идентификатор типа задания
     /// </summary>
     public required Ulid TaskTypeId { get; set; }
@@ -61,7 +71,7 @@ public class Task : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribute
     /// <summary>
     /// Цель
     /// </summary>
-    public required string TargetValue { get; set; }
+    public required int TargetValue { get; set; }
 
     /// <summary>
     /// Дата создания
@@ -77,4 +87,9 @@ public class Task : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribute
     /// Статус архивности
     /// </summary>
     public bool IsArchive { get; set; }
+
+    /// <summary>
+    /// Выполнения
+    /// </summary>
+    public ICollection<Completion>? Completions { get; set; }
 }

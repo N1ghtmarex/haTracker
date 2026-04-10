@@ -28,4 +28,14 @@ public class User : BaseEntity<Ulid>, IHasTrackDateAttribute, IHasArchiveTrack
     /// Статус архивности
     /// </summary>
     public bool IsArchive { get; set; }
+
+    /// <summary>
+    /// Выполнения
+    /// </summary>
+    public ICollection<Completion>? Completions { get; set; }
+
+    /// <summary>
+    /// Задания
+    /// </summary>
+    public ICollection<Task>? Tasks { get; set; }
 }

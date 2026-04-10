@@ -31,4 +31,9 @@ public class Unit : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribute
     /// Статус архивности
     /// </summary>
     public bool IsArchive { get; set; }
+
+    /// <summary>
+    /// Задания
+    /// </summary>
+    public ICollection<Task>? Tasks { get; set; }
 }

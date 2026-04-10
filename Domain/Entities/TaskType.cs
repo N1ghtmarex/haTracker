@@ -26,4 +26,9 @@ public class TaskType : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribu
     /// Статус архивности
     /// </summary>
     public bool IsArchive { get; set; }
+
+    /// <summary>
+    /// Задания
+    /// </summary>
+    public ICollection<Task>? Tasks { get; set; }
 }
