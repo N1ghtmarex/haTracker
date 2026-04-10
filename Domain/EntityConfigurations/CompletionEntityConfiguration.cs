@@ -39,7 +39,7 @@ public class CompletionEntityConfiguration : IEntityTypeConfiguration<Completion
             );
         builder.HasIndex(x => x.TaskId).IsUnique(false);
         builder.HasOne(x => x.Task)
-            .WithMany()
+            .WithMany(x => x.Completions)
             .HasForeignKey(x => x.TaskId)
             .OnDelete(DeleteBehavior.Cascade);
 
