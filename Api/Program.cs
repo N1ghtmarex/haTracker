@@ -1,7 +1,9 @@
 using Api.StartupConfigurations.Options;
 using Application;
 using Domain;
+using Infrastructure;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
@@ -33,8 +35,12 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.RegisterDataAccessService(builder.Configuration);
 builder.Services.RegisterUseCasesService();
+builder.Services.RegisterInfrastructureServices();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 var app = builder.Build();
 
