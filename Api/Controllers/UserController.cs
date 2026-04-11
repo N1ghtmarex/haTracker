@@ -12,7 +12,7 @@ namespace Api.Controllers;
 public class UserController(ISender sender) : ControllerBase
 {
     /// <summary>
-    /// Получние конкретного пользователя
+    /// Получение конкретного пользователя
     /// </summary>
     /// <param name="query">Модель запроса</param>
     /// <param name="cancellationToken">Токен отмены</param>
@@ -24,7 +24,7 @@ public class UserController(ISender sender) : ControllerBase
     }
 
     /// <summary>
-    /// Получние списка пользователей
+    /// Получение списка пользователей
     /// </summary>
     /// <param name="query">Модель запроса</param>
     /// <param name="cancellationToken">Токен отмены</param>
