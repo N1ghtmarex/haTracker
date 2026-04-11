@@ -49,7 +49,7 @@ public class TaskViewModel
     /// <summary>
     /// Единица измерения
     /// </summary>
-    public required UnitViewModel Unit { get; init; }
+    public UnitViewModel? Unit { get; init; }
 
     /// <summary>
     /// Целевое значение

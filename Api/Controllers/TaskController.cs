@@ -47,4 +47,16 @@ public class TaskController(ISender sender) : ControllerBase
     {
         return await sender.Send(command, cancellationToken);
     }
+
+    /// <summary>
+    /// Получение списка заданий
+    /// </summary>
+    /// <param name="query">Модель запроса</param>
+    /// <param name="cancellationToken">Токен отмены</param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<Result<PagedResult<TaskViewModel>>> GetTask([FromQuery] GetTaskListQuery query, CancellationToken cancellationToken)
+    {
+        return await sender.Send(query, cancellationToken);
+    }
 }

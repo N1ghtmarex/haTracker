@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Task.Handlers;
 
-internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHandler<GetTaskTypeListQuery, Result<PagedResult<TaskTypeViewModel>>>
+internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHandler<GetTaskTypeListQuery, Result<PagedResult<TaskTypeViewModel>>>,
+    IRequestHandler<GetTaskListQuery, Result<PagedResult<TaskViewModel>>>
 {
     public async Task<Result<PagedResult<TaskTypeViewModel>>> Handle(GetTaskTypeListQuery request, CancellationToken cancellationToken)
     {
@@ -23,6 +24,27 @@ internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHan
         var result = await query
             .ApplyPagination(request)
             .ProjectToViewModel()
+            .ToListAsync(cancellationToken);
+
+        return Result.Success(result.AsPagedResult(request, await query.CountAsync(cancellationToken)));
+    }
+
+    public async Task<Result<PagedResult<TaskViewModel>>> Handle(GetTaskListQuery request, CancellationToken cancellationToken)
+    {
+        var query = dbContext.Tasks
+            .AsNoTracking()
+            .Where(x => !x.IsArchive)
+            .Include(x => x.Color)
+            .Include(x => x.Emoji)
+            .Include(x => x.Unit)
+            .Include(x => x.Author)
+            .Include(x => x.TaskType)
+            .OrderBy(x => x.Title)
+            .ApplySearch(request, x => x.Title);
+
+        var result = await query
+            .ApplyPagination(request)
+            .Select(x => TaskMapper.MapToViewModel(x))
             .ToListAsync(cancellationToken);
 
         return Result.Success(result.AsPagedResult(request, await query.CountAsync(cancellationToken)));
