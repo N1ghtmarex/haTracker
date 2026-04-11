@@ -35,4 +35,16 @@ public class TaskController(ISender sender) : ControllerBase
     {
         return await sender.Send(query, cancellationToken);
     }
+
+    /// <summary>
+    /// Добавление задания
+    /// </summary>
+    /// <param name="command">Модель запроса</param>
+    /// <param name="cancellationToken">Токен отмены</param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<Result<Ulid>> AddTask([FromBody] AddTaskCommand command, CancellationToken cancellationToken)
+    {
+        return await sender.Send(command, cancellationToken);
+    }
 }

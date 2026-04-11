@@ -35,7 +35,7 @@ public class AddTaskModel
     /// <summary>
     /// Единица измерения
     /// </summary>
-    public required Ulid? UnitId { get; init; }
+    public Ulid? UnitId { get; init; }
 
     /// <summary>
     /// Целевое значение

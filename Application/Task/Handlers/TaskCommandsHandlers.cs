@@ -1,4 +1,5 @@
-﻿using Application.Task.Commands;
+﻿using Abstractions.Interfaces;
+using Application.Task.Commands;
 using Application.Task.Mappers;
 using Core.Utils;
 using Domain;
@@ -7,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Task.Handlers;
 
-internal class TaskCommandsHandlers(ApplicationDbContext dbContext) : IRequestHandler<AddTaskTypeCommand, Result<Ulid>>
+internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorService colorService, IEmojiService emojiService,
+    IUnitService unitService, IUserService userService) : IRequestHandler<AddTaskTypeCommand, Result<Ulid>>,
+    IRequestHandler<AddTaskCommand, Result<Ulid>>
 {
     public async Task<Result<Ulid>> Handle(AddTaskTypeCommand request, CancellationToken cancellationToken)
     {
@@ -27,5 +30,21 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext) : IRequestHa
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return Result.Success(createdTaskType.Entity.Id);
+    }
+
+    public async Task<Result<Ulid>> Handle(AddTaskCommand request, CancellationToken cancellationToken)
+    {
+        var taskToCreate = TaskMapper.MapToEntity(request.Body, Ulid.Parse("01FZJ5K5Z0K8QH3X9N5G0RT0D5"));
+
+        await colorService.GetColorAsync(taskToCreate.ColorId, cancellationToken);
+        await emojiService.GetEmojiAsync(taskToCreate.ColorId, cancellationToken);
+        await unitService.GetUnitAsync(taskToCreate.ColorId, cancellationToken);
+        await userService.GetUserAsync(taskToCreate.ColorId, cancellationToken);
+
+        var createdTask = await dbContext.AddAsync(taskToCreate, cancellationToken);
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return Result.Success(createdTask.Entity.Id);
     }
 }
