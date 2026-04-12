@@ -12,6 +12,8 @@ public static class ServiceRegistrar
         services.AddTransient<IEmojiService, EmojiService>();
         services.AddTransient<IUnitService, UnitService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddTransient<ITaskService, TaskService>();
+        services.AddTransient<ICompletionService, CompletionService>();
 
         return services;
     }

@@ -5,6 +5,7 @@ using Core.EntityFramework.Features.SearchPagination.Models;
 using Core.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Api.Controllers;
 
@@ -58,5 +59,17 @@ public class TaskController(ISender sender) : ControllerBase
     public async Task<Result<PagedResult<TaskViewModel>>> GetTask([FromQuery] GetTaskListQuery query, CancellationToken cancellationToken)
     {
         return await sender.Send(query, cancellationToken);
+    }
+
+    /// <summary>
+    /// Изменение прогресса выполнения задания
+    /// </summary>
+    /// <param name="command">Модель запроса</param>
+    /// <param name="cancellationToken">Токен отмены</param>
+    /// <returns></returns>
+    [HttpPost("completion")]
+    public async Task<Result<string>> EditTaskCompletion([FromBody] EditTaskCompletionCommand command, CancellationToken cancellationToken)
+    {
+        return await sender.Send(command, cancellationToken);
     }
 }

@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Task.Handlers;
 
 internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorService colorService, IEmojiService emojiService,
-    IUnitService unitService, IUserService userService) : IRequestHandler<AddTaskTypeCommand, Result<Ulid>>,
-    IRequestHandler<AddTaskCommand, Result<Ulid>>
+    IUnitService unitService, IUserService userService, ITaskService taskService, ICompletionService completionService)
+        : IRequestHandler<AddTaskTypeCommand, Result<Ulid>>, IRequestHandler<AddTaskCommand, Result<Ulid>>,
+        IRequestHandler<EditTaskCompletionCommand, Result<string>>
 {
     public async Task<Result<Ulid>> Handle(AddTaskTypeCommand request, CancellationToken cancellationToken)
     {
@@ -46,5 +47,40 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorServic
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return Result.Success(createdTask.Entity.Id);
+    }
+
+    public async Task<Result<string>> Handle(EditTaskCompletionCommand request, CancellationToken cancellationToken)
+    {
+        var task = await taskService.GetTaskAsync(request.Body.TaskId, cancellationToken);
+
+        if (task.IsFailure)
+        {
+            return Result.Failure<string>($"Задание с идентификатором \"{request.Body.TaskId}\" не найдено!");
+        }
+
+        var completion = await completionService.GetTaskCompletionByDateAsync(task.Value!.Id, DateTimeOffset.UtcNow, cancellationToken);
+
+        if (completion != null)
+        {
+            if (request.Body.CurrentValue == null)
+            {
+                return Result.Failure<string>($"Задание с идентификатором \"{request.Body.TaskId}\" уже выполнено!");
+            }
+            
+            completion.CurrentValue = request.Body.CurrentValue;
+
+            completion.IsCompleted = completion.CurrentValue >= task.Value.TargetValue;
+
+            return Result.Success(completion.IsCompleted ? "Задание выполнено!" : "Изменение прогресса засчитано!");
+        }
+
+        var completionToCreate = CompletionMapper.MapToEntity(request.Body, userId: Ulid.Parse("01FZJ5K5Z0K8QH3X9N5G0RT0D5"), 
+            isCompleted: request.Body.CurrentValue != null && request.Body.CurrentValue == task.Value.TargetValue);
+
+        var createdCompletion = await dbContext.AddAsync(completionToCreate, cancellationToken);
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return Result.Success(createdCompletion.Entity.IsCompleted ? "Задание выполнено!" : "Изменение прогресса засчитано!");
     }
 }
