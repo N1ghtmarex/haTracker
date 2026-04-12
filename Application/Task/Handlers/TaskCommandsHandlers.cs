@@ -75,7 +75,7 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorServic
         }
 
         var completionToCreate = CompletionMapper.MapToEntity(request.Body, userId: Ulid.Parse("01FZJ5K5Z0K8QH3X9N5G0RT0D5"), 
-            isCompleted: request.Body.CurrentValue != null && request.Body.CurrentValue == task.Value.TargetValue);
+            isCompleted: (request.Body.CurrentValue != null && request.Body.CurrentValue == task.Value.TargetValue) || task.Value.TargetValue == 0);
 
         var createdCompletion = await dbContext.AddAsync(completionToCreate, cancellationToken);
 
