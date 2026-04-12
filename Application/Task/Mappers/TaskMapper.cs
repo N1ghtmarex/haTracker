@@ -18,5 +18,5 @@ public static partial class TaskMapper
     [MapValue(nameof(Domain.Entities.Task.Id), Use = nameof(@GeneralMapper.GenerateId))]
     public static partial Domain.Entities.Task MapToEntity(AddTaskModel source, Ulid authorId);
 
-    public static partial TaskViewModel MapToViewModel(Domain.Entities.Task source);
+    public static partial TaskViewModel MapToViewModel(Domain.Entities.Task source, int? currentValue, bool isCompleted);
 }

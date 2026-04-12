@@ -23,7 +23,7 @@ namespace Application.Task.Mappers
         }
 
         [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
-        public static partial global::Application.Task.Dtos.TaskViewModel MapToViewModel(global::Domain.Entities.Task source)
+        public static partial global::Application.Task.Dtos.TaskViewModel MapToViewModel(global::Domain.Entities.Task source, int? currentValue, bool isCompleted)
         {
             var target = new global::Application.Task.Dtos.TaskViewModel()
             {
@@ -36,6 +36,8 @@ namespace Application.Task.Mappers
                 TrackingType = source.TrackingType,
                 Unit = source.Unit != null ? MapToUnitViewModel(source.Unit) : default,
                 TargetValue = source.TargetValue,
+                CurrentValue = currentValue,
+                IsCompleted = isCompleted,
                 CreatedAt = source.CreatedAt,
                 UpdatedAt = source.UpdatedAt,
             };

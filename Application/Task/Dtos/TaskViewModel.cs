@@ -57,6 +57,16 @@ public class TaskViewModel
     public required int TargetValue { get; init; }
 
     /// <summary>
+    /// Текущее значение
+    /// </summary>
+    public int? CurrentValue { get; init; }
+
+    /// <summary>
+    /// Статус выполнения
+    /// </summary>
+    public required bool IsCompleted { get; init; }
+
+    /// <summary>
     /// Дата создания
     /// </summary>
     public required DateTimeOffset CreatedAt { get; init; }
