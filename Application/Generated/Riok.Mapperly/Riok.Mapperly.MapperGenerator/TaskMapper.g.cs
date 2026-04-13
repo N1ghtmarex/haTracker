@@ -31,7 +31,7 @@ namespace Application.Task.Mappers
                 Author = source.Author != null ? MapToUserViewModel(source.Author) : throw new global::System.ArgumentNullException(nameof(source.Author)),
                 TaskType = source.TaskType != null ? MapToTaskTypeViewModel(source.TaskType) : throw new global::System.ArgumentNullException(nameof(source.TaskType)),
                 Title = source.Title,
-                Emoji = source.Emoji != null ? MapToEmojiViewModel(source.Emoji) : throw new global::System.ArgumentNullException(nameof(source.Emoji)),
+                Emoji = source.Emoji != null ? MapToEmojiViewModel(source.Emoji) : default,
                 Color = source.Color != null ? MapToColorViewModel(source.Color) : throw new global::System.ArgumentNullException(nameof(source.Color)),
                 TrackingType = source.TrackingType,
                 Unit = source.Unit != null ? MapToUnitViewModel(source.Unit) : default,

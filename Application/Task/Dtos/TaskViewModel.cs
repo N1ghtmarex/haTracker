@@ -34,7 +34,7 @@ public class TaskViewModel
     /// <summary>
     /// Эмодзи
     /// </summary>
-    public required EmojiViewModel Emoji { get; init; }
+    public EmojiViewModel? Emoji { get; init; }
 
     /// <summary>
     /// Цвет
