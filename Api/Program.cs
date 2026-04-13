@@ -10,6 +10,13 @@ using System.Xml.XPath;
 var builder = WebApplication.CreateBuilder(args);
 
 #if DEBUG
+builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SchemaFilter<UlidSchemaFilter>();
@@ -55,6 +62,10 @@ app.UseSwaggerUI(c =>
 #endif
 
 app.MapControllers();
+
+#if DEBUG
+app.UseCors("AllowAll");
+#endif
 
 app.MigrateDb();
 
