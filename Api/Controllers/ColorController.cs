@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("color")]
+[Route("api/color")]
 public class ColorController(ISender sender) : ControllerBase
 {
     /// <summary>

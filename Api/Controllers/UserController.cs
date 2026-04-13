@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("user")]
+[Route("api/user")]
 public class UserController(ISender sender) : ControllerBase
 {
     /// <summary>

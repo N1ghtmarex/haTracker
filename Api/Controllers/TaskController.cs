@@ -5,12 +5,11 @@ using Core.EntityFramework.Features.SearchPagination.Models;
 using Core.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Api.Controllers;
 
 [ApiController]
-[Route("task")]
+[Route("api/task")]
 public class TaskController(ISender sender) : ControllerBase
 {
     /// <summary>

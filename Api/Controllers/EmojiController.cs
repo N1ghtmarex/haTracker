@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("emoji")]
+[Route("api/emoji")]
 public class EmojiController(ISender sender) : ControllerBase
 {
     /// <summary>

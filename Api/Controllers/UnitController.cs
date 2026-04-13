@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("unit")]
+[Route("api/unit")]
 public class UnitController(ISender sender) : ControllerBase
 {
     /// <summary>
