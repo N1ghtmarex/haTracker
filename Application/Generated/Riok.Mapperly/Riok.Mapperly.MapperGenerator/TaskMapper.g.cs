@@ -15,6 +15,7 @@ namespace Application.Task.Mappers
                 ColorId = source.ColorId,
                 TrackingType = source.TrackingType,
                 TargetValue = source.TargetValue,
+                Date = source.Date,
             };
             target.EmojiId = source.EmojiId;
             target.UnitId = source.UnitId;

@@ -41,4 +41,9 @@ public class AddTaskModel
     /// Целевое значение
     /// </summary>
     public required int TargetValue { get; init; }
+
+    /// <summary>
+    /// Дата
+    /// </summary>
+    public required DateTimeOffset Date { get; init; }
 }

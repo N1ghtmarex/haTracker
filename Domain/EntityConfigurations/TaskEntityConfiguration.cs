@@ -84,6 +84,8 @@ public class TaskEntityConfiguration : IEntityTypeConfiguration<Entities.Task>
 
         builder.Property(x => x.TargetValue).IsRequired();
 
+        builder.Property(x => x.Date).IsRequired();
+
         builder.Property(x => x.CreatedAt).IsRequired();
         builder.Property(x => x.UpdatedAt).IsRequired();
         builder.Property(x => x.IsArchive).IsRequired();

@@ -89,6 +89,11 @@ public class Task : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribute
     public bool IsArchive { get; set; }
 
     /// <summary>
+    /// Дата
+    /// </summary>
+    public required DateTimeOffset Date { get; set; }
+
+    /// <summary>
     /// Выполнения
     /// </summary>
     public ICollection<Completion>? Completions { get; set; }
