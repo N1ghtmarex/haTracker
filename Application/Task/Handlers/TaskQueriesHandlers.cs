@@ -13,6 +13,9 @@ namespace Application.Task.Handlers;
 internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHandler<GetTaskTypeListQuery, Result<PagedResult<TaskTypeViewModel>>>,
     IRequestHandler<GetTaskListQuery, Result<PagedResult<TaskViewModel>>>
 {
+    private static Ulid taskTypeId = Ulid.Parse("01KNX9A1FWD6WAZX9ZAY4CXAFQ");
+    private static Ulid dailyTypeId = Ulid.Parse("01KNX9ARBT9JK0RCJN2F1K92ET");
+
     public async Task<Result<PagedResult<TaskTypeViewModel>>> Handle(GetTaskTypeListQuery request, CancellationToken cancellationToken)
     {
         var query = dbContext.TaskTypes
@@ -33,14 +36,27 @@ internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHan
     {
         var query = dbContext.Tasks
             .AsNoTracking()
-            .Where(x => !x.IsArchive)
-            .Include(x => x.Color)
-            .Include(x => x.Emoji)
-            .Include(x => x.Unit)
-            .Include(x => x.Author)
-            .Include(x => x.TaskType)
-            .OrderBy(x => x.Title)
-            .ApplySearch(request, x => x.Title);
+            .Where(x => !x.IsArchive && x.TaskTypeId == request.TaskTypeId);
+
+        if (request.TaskTypeId == taskTypeId && request.Date != null)
+        {
+            query = query
+                .Where(x => x.CreatedAt.Date == request.Date.Value.Date);
+        }
+        else if (request.TaskTypeId == dailyTypeId && request.Date != null)
+        {
+            query = query
+                .Where(x => x.CreatedAt.Date <= request.Date.Value.Date);
+        }
+
+            query = query
+                .Include(x => x.Color)
+                .Include(x => x.Emoji)
+                .Include(x => x.Unit)
+                .Include(x => x.Author)
+                .Include(x => x.TaskType)
+                .OrderBy(x => x.Title)
+                .ApplySearch(request, x => x.Title);
 
         var result = await query
             .ApplyPagination(request)
