@@ -41,22 +41,22 @@ internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHan
         if (request.TaskTypeId == taskTypeId && request.Date != null)
         {
             query = query
-                .Where(x => x.CreatedAt.Date == request.Date.Value.Date);
+                .Where(x => x.Date.Date == request.Date.Value.Date.Date);
         }
         else if (request.TaskTypeId == dailyTypeId && request.Date != null)
         {
             query = query
-                .Where(x => x.CreatedAt.Date <= request.Date.Value.Date);
+                .Where(x => x.Date.Date <= request.Date.Value.Date.Date);
         }
 
-            query = query
-                .Include(x => x.Color)
-                .Include(x => x.Emoji)
-                .Include(x => x.Unit)
-                .Include(x => x.Author)
-                .Include(x => x.TaskType)
-                .OrderBy(x => x.Title)
-                .ApplySearch(request, x => x.Title);
+        query = query
+            .Include(x => x.Color)
+            .Include(x => x.Emoji)
+            .Include(x => x.Unit)
+            .Include(x => x.Author)
+            .Include(x => x.TaskType)
+            .OrderBy(x => x.Title)
+            .ApplySearch(request, x => x.Title);
 
         var result = await query
             .ApplyPagination(request)
