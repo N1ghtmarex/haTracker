@@ -69,7 +69,7 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorServic
             
             completion.CurrentValue = request.Body.CurrentValue;
 
-            completion.IsCompleted = completion.CurrentValue >= task.Value.TargetValue;
+            completion.IsCompleted = (!completion.IsCompleted || request.Body.CurrentValue != 0) && completion.CurrentValue >= task.Value.TargetValue;
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
