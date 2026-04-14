@@ -9,4 +9,9 @@ public class AddTaskTypeModel
     /// Наименование
     /// </summary>
     public required string Name { get; init; }
+
+    /// <summary>
+    /// Иконка
+    /// </summary>
+    public required string Icon { get; init; }
 }

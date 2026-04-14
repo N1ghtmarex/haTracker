@@ -13,6 +13,11 @@ public class TaskType : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttribu
     public required string Name { get; set; }
 
     /// <summary>
+    /// Иконка
+    /// </summary>
+    public required string Icon { get; set; }
+
+    /// <summary>
     /// Дата создания
     /// </summary>
     public DateTimeOffset CreatedAt { get; set; }

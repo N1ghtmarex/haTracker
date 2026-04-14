@@ -10,6 +10,7 @@ namespace Application.Task.Mappers
             var target = new global::Domain.Entities.TaskType()
             {
                 Name = source.Name,
+                Icon = source.Icon,
             };
             target.Id = global::Application.Mappers.GeneralMapper.GenerateId();
             return target;
@@ -25,6 +26,7 @@ namespace Application.Task.Mappers
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Icon = x.Icon,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                 }

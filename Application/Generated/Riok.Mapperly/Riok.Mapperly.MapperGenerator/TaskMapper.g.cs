@@ -66,6 +66,7 @@ namespace Application.Task.Mappers
             {
                 Id = source.Id,
                 Name = source.Name,
+                Icon = source.Icon,
                 CreatedAt = source.CreatedAt,
                 UpdatedAt = source.UpdatedAt,
             };

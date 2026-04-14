@@ -16,6 +16,11 @@ public class TaskTypeViewModel
     public required string Name { get; init; }
 
     /// <summary>
+    /// Иконка
+    /// </summary>
+    public required string Icon { get; init; }
+
+    /// <summary>
     /// Дата создания
     /// </summary>
     public required DateTimeOffset CreatedAt { get; init; }

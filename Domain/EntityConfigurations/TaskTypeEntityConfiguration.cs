@@ -20,6 +20,7 @@ public class TaskTypeEntityConfiguration : IEntityTypeConfiguration<TaskType>
         builder.HasIndex(x => x.Id).IsUnique();
 
         builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+        builder.Property(x => x.Icon).IsRequired().HasMaxLength(10);
 
         builder.Property(x => x.CreatedAt).IsRequired();
         builder.Property(x => x.UpdatedAt).IsRequired();
