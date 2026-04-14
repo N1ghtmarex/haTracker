@@ -71,6 +71,8 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorServic
 
             completion.IsCompleted = completion.CurrentValue >= task.Value.TargetValue;
 
+            await dbContext.SaveChangesAsync(cancellationToken);
+
             return Result.Success(completion.IsCompleted ? "Задание выполнено!" : "Изменение прогресса засчитано!");
         }
 
