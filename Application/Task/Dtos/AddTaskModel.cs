@@ -20,7 +20,7 @@ public class AddTaskModel
     /// <summary>
     /// Идентификатор эмодзи
     /// </summary>
-    public required Ulid EmojiId { get; init; }
+    public Ulid? EmojiId { get; init; }
 
     /// <summary>
     /// Идентификатор цвета
