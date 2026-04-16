@@ -11,6 +11,6 @@ public class CompletionService(ApplicationDbContext dbContext) : ICompletionServ
     public async Task<Completion?> GetTaskCompletionByDateAsync(Ulid id, DateTimeOffset date, CancellationToken cancellationToken = default)
     {
         return await dbContext.Completions
-            .SingleOrDefaultAsync(x => x.TaskId == id && x.CreatedAt.Date == date.Date, cancellationToken);
+            .SingleOrDefaultAsync(x => x.TaskId == id && x.Date.Date == date.Date, cancellationToken);
     }
 }

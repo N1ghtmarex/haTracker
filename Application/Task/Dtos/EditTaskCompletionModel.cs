@@ -14,4 +14,9 @@ public class EditTaskCompletionModel
     /// Текущее значение
     /// </summary>
     public int? CurrentValue { get; init; }
+
+    /// <summary>
+    /// Дата
+    /// </summary>
+    public DateTimeOffset Date { get; init; }
 }

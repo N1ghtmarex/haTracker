@@ -60,8 +60,10 @@ internal class TaskQueriesHandlers(ApplicationDbContext dbContext) : IRequestHan
 
         var result = await query
             .ApplyPagination(request)
-            .Select(x => TaskMapper.MapToViewModel(x, x.Completions != null && x.Completions.First() != null ? x.Completions.First().CurrentValue : 0,
-                x.Completions != null && x.Completions.First() != null && x.Completions.First().IsCompleted))
+            .Select(x => TaskMapper.MapToViewModel(x, x.Completions != null && x.Completions.FirstOrDefault(x => x.Date.Date == request.Date.GetValueOrDefault().Date) != null 
+                ? x.Completions.FirstOrDefault(x => x.Date.Date == request.Date.GetValueOrDefault().Date)!.CurrentValue : 0,
+                    x.Completions != null && x.Completions.FirstOrDefault(x => x.Date.Date == request.Date.GetValueOrDefault().Date) != null 
+                        && x.Completions.FirstOrDefault(x => x.Date.Date == request.Date.GetValueOrDefault().Date)!.IsCompleted))
             .ToListAsync(cancellationToken);
 
         return Result.Success(result.AsPagedResult(request, await query.CountAsync(cancellationToken)));

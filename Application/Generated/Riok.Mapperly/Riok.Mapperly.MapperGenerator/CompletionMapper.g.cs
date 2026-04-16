@@ -12,6 +12,7 @@ namespace Application.Task.Mappers
                 UserId = userId,
                 TaskId = source.TaskId,
                 IsCompleted = isCompleted,
+                Date = source.Date,
             };
             target.CurrentValue = source.CurrentValue;
             target.Id = global::Application.Mappers.GeneralMapper.GenerateId();

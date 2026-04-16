@@ -45,6 +45,7 @@ public class CompletionEntityConfiguration : IEntityTypeConfiguration<Completion
 
         builder.Property(x => x.IsCompleted).IsRequired();
         builder.Property(x => x.CurrentValue).IsRequired(false);
+        builder.Property(x => x.Date).IsRequired();
 
         builder.Property(x => x.CreatedAt).IsRequired();
         builder.Property(x => x.UpdatedAt).IsRequired();

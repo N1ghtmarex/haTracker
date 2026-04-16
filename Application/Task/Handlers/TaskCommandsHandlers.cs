@@ -58,7 +58,7 @@ internal class TaskCommandsHandlers(ApplicationDbContext dbContext, IColorServic
             return Result.Failure<string>($"Задание с идентификатором \"{request.Body.TaskId}\" не найдено!");
         }
 
-        var completion = await completionService.GetTaskCompletionByDateAsync(task.Value!.Id, DateTimeOffset.UtcNow, cancellationToken);
+        var completion = await completionService.GetTaskCompletionByDateAsync(task.Value!.Id, request.Body.Date, cancellationToken);
 
         if (completion != null)
         {

@@ -38,6 +38,11 @@ public class Completion : BaseEntity<Ulid>, IHasArchiveTrack, IHasTrackDateAttri
     public int? CurrentValue { get; set; }
 
     /// <summary>
+    /// Время отметки
+    /// </summary>
+    public required DateTimeOffset Date { get; init; }
+
+    /// <summary>
     /// Дата создания
     /// </summary>
     public DateTimeOffset CreatedAt { get; set; }
