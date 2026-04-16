@@ -71,4 +71,17 @@ public class TaskController(ISender sender) : ControllerBase
     {
         return await sender.Send(command, cancellationToken);
     }
+
+
+    /// <summary>
+    /// Получение списка выполнений всех заданий
+    /// </summary>
+    /// <param name="query">Модель запроса</param>
+    /// <param name="cancellationToken">Токен отмены</param>
+    /// <returns></returns>
+    [HttpGet("completion")]
+    public async Task<Result<PagedResult<TaskCompletionViewModel>>> GetCompletions([FromQuery] GetTasksCompletionsListQuery query, CancellationToken cancellationToken)
+    {
+        return await sender.Send(query, cancellationToken);
+    }
 }

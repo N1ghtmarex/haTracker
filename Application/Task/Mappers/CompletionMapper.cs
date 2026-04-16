@@ -10,4 +10,6 @@ public static partial class CompletionMapper
 {
     [MapValue(nameof(Completion.Id), Use = nameof(@GeneralMapper.GenerateId))]
     public static partial Completion MapToEntity(EditTaskCompletionModel source, Ulid userId, bool isCompleted);
+
+    public static partial TaskCompletionViewModel MapToViewModel(Domain.Entities.Task source, int maxStreak, int currentStreak);
 }

@@ -18,5 +18,68 @@ namespace Application.Task.Mappers
             target.Id = global::Application.Mappers.GeneralMapper.GenerateId();
             return target;
         }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        public static partial global::Application.Task.Dtos.TaskCompletionViewModel MapToViewModel(global::Domain.Entities.Task source, int maxStreak, int currentStreak)
+        {
+            var target = new global::Application.Task.Dtos.TaskCompletionViewModel()
+            {
+                Id = source.Id,
+                Title = source.Title,
+                Emoji = source.Emoji != null ? MapToEmojiViewModel(source.Emoji) : default,
+                TargetValue = source.TargetValue,
+                Color = source.Color != null ? MapToColorViewModel(source.Color) : throw new global::System.ArgumentNullException(nameof(source.Color)),
+                MaxStreak = maxStreak,
+                CurrentStreak = currentStreak,
+                Completions = source.Completions != null ? MapToListOfCompletionViewModel(source.Completions) : default,
+            };
+            return target;
+        }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        private static global::Application.Emoji.Dtos.EmojiViewModel MapToEmojiViewModel(global::Domain.Entities.Emoji source)
+        {
+            var target = new global::Application.Emoji.Dtos.EmojiViewModel()
+            {
+                Id = source.Id,
+                Value = source.Value,
+            };
+            return target;
+        }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        private static global::Application.Color.Dtos.ColorViewModel MapToColorViewModel(global::Domain.Entities.Color source)
+        {
+            var target = new global::Application.Color.Dtos.ColorViewModel()
+            {
+                Id = source.Id,
+                Value = source.Value,
+            };
+            return target;
+        }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        private static global::Application.Task.Dtos.CompletionViewModel MapToCompletionViewModel(global::Domain.Entities.Completion source)
+        {
+            var target = new global::Application.Task.Dtos.CompletionViewModel()
+            {
+                Id = source.Id,
+                Date = source.Date,
+                CurrentValue = source.CurrentValue ?? throw new global::System.ArgumentNullException(nameof(source.CurrentValue)),
+                IsCompleted = source.IsCompleted,
+            };
+            return target;
+        }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        private static global::System.Collections.Generic.List<global::Application.Task.Dtos.CompletionViewModel> MapToListOfCompletionViewModel(global::System.Collections.Generic.ICollection<global::Domain.Entities.Completion> source)
+        {
+            var target = new global::System.Collections.Generic.List<global::Application.Task.Dtos.CompletionViewModel>(source.Count);
+            foreach (var item in source)
+            {
+                target.Add(MapToCompletionViewModel(item));
+            }
+            return target;
+        }
     }
 }
